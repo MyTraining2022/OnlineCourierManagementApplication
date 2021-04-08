@@ -1,10 +1,10 @@
-package com.cg.trg.boot;
+package com.trg.trainner.boot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class SpringRest11ApplicationTests {
+class SpringlabApplicationTests {
 
 	@Test
 	void contextLoads() {
