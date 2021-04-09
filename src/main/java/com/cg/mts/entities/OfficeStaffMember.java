@@ -26,15 +26,13 @@ public class OfficeStaffMember {
 	private String role;
 	
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="houseNo")
-	private Address address;
+	//@OneToOne(cascade=CascadeType.ALL)
+	//@JoinColumn(name="addressid")
+	//private Address address;
 	
-	@ManyToOne
-	@JoinColumn(name="officeid")
-	private CourierOfficeOutlet office;
+
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="managerId")
 	private Manager mgr;
 	
@@ -76,29 +74,14 @@ public class OfficeStaffMember {
 		this.role = role;
 	}
 	
-	public Address getAddress() {
-		return address;
-	}
 
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
 
 
-	public CourierOfficeOutlet getOffice() {
-		return office;
-	}
-
-
-	public void setOffice(CourierOfficeOutlet office) {
-		this.office = office;
-	}
 	
 	@Override
 	public String toString() {
-		return "OfficeStaffMember [empid=" + empid + ", name=" + name + ", role=" + role + ", Address=" + address
-				+ ", office=" + office + "]";
+		return "OfficeStaffMember [empid=" + empid + ", name=" + name + ", role=" + role +  "]";
 	}
 
 	

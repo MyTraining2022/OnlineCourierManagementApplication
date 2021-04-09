@@ -2,6 +2,7 @@ package com.cg.mts.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -10,31 +11,29 @@ import javax.persistence.Table;
 public class Address {
 	
 	@Id
-	private int houseNo;
-	
+	private int addressid;
+	private String houseNo;
     private String street;
 	private String city;
 	private String state;
 	private String country;
 	private int zip;
 	
-	@OneToOne(mappedBy="addr")
+	@OneToOne                                //(mappedBy="addr")
+	@JoinColumn(name="customerid")
 	private Customer customer;
 	
-	@OneToOne(mappedBy="address")
+	@OneToOne
+	@JoinColumn(name="empId")                //(mappedBy="address")
 	private OfficeStaffMember officeMem;
 
-	@OneToOne(mappedBy="addre")
+	@OneToOne
+	@JoinColumn(name="officeId")             //(mappedBy="addre")
 	private CourierOfficeOutlet office;
-	
-	public Address() {
-		
-	}
-	
-	
-	
-	public Address(int houseNo, String street, String city, String state, String country, int zip) {
+
+	public Address(int addressid, String houseNo, String street, String city, String state, String country, int zip) {
 		super();
+		this.addressid = addressid;
 		this.houseNo = houseNo;
 		this.street = street;
 		this.city = city;
@@ -42,12 +41,20 @@ public class Address {
 		this.country = country;
 		this.zip = zip;
 	}
-	
-	
-	public int getHouseNo() {
+	public Address() {
+		super();
+		
+	}
+	public int getAddressid() {
+		return addressid;
+	}
+	public void setAddressid(int addressid) {
+		this.addressid = addressid;
+	}
+	public String getHouseNo() {
 		return houseNo;
 	}
-	public void setHouseNo(int houseNo) {
+	public void setHouseNo(String houseNo) {
 		this.houseNo = houseNo;
 	}
 	public String getStreet() {
@@ -80,18 +87,25 @@ public class Address {
 	public void setZip(int zip) {
 		this.zip = zip;
 	}
-
-
-	@Override
-	public String toString() {
-		return "Address [HouseNo=" + houseNo + ", Street=" + street + ", City=" + city + ", State=" + state
-				+ ", Country=" + country + ", Zip=" + zip + "]";
+	public Customer getCustomer() {
+		return customer;
 	}
-
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+	public OfficeStaffMember getOfficeMem() {
+		return officeMem;
+	}
+	public void setOfficeMem(OfficeStaffMember officeMem) {
+		this.officeMem = officeMem;
+	}
+	public CourierOfficeOutlet getOffice() {
+		return office;
+	}
+	public void setOffice(CourierOfficeOutlet office) {
+		this.office = office;
+	}
 	
 	
 	
-	
-	
-
 }

@@ -1,6 +1,7 @@
 package com.cg.mts.entities;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -22,12 +23,12 @@ public class CourierOfficeOutlet {
 	private LocalTime closingTime;	
 	
 	@OneToMany(mappedBy="office",cascade=CascadeType.ALL)
-	private List<OfficeStaffMember> staffmembers;
+	private List<OfficeStaffMember> staffmembers= new ArrayList<>();
     
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="houseNo")
-	private Address addre;
+	//@OneToOne(cascade=CascadeType.ALL)
+	//@JoinColumn(name="addressid")
+	//private Address addre;
 	
 	
 	public CourierOfficeOutlet() {
@@ -73,18 +74,12 @@ public class CourierOfficeOutlet {
 		this.staffmembers = staffmembers;
 	}
 
-	public Address getAddress() {
-		return addre;
-	}
-
-	public void setAddress(Address address) {
-		this.addre = address;
-	}
+	
 
 	@Override
 	public String toString() {
 		return "CourierOfficeOutlet [officeid=" + officeid + ", openingTime=" + openingTime + ", closingTime="
-				+ closingTime + ", staffmembers=" + staffmembers + ", address=" + addre + "]";
+				+ closingTime + ", staffmembers=" + staffmembers + "]";
 	}
 	
 	

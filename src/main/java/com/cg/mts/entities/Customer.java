@@ -19,19 +19,20 @@ public class Customer {
 	private int aadharno;
 	private String firstname;
 	private String lastname;
+	private int mobileno;
 
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	private Complaint complaint;
+	private List<Complaint> complaint=new ArrayList<>();
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "houseNo")
-	private Address addr;
+	//@OneToOne(cascade = CascadeType.ALL)
+	//@JoinColumn(name = "houseNo")
+	//private Address addr;
 
-	private int mobileno;
+	
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "paymentno")
-	private Payment acct;
+	private BankAccount acct;
 
 	@OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
 	private List<Courier> courierSender = new ArrayList<>();
@@ -40,33 +41,24 @@ public class Customer {
 	private List<Courier> courierReceiver = new ArrayList<>();
 
 	public Customer() {
+		
+		
+	}
+
+	public Customer(int customerid, int aadharno, String firstname, String lastname, int mobileno) {
 		super();
 		this.customerid = customerid;
 		this.aadharno = aadharno;
 		this.firstname = firstname;
 		this.lastname = lastname;
-		this.addr = addr;
 		this.mobileno = mobileno;
-		this.acct = acct;
 	}
 
-	public Customer(int customerid, int aadharno, String firstname, String lastname, Address addr, int mobileno,
-			Payment acct) {
-		super();
-		this.customerid = customerid;
-		this.aadharno = aadharno;
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.addr = addr;
-		this.mobileno = mobileno;
-		this.acct = acct;
-	}
-
-	public Complaint getComplaint() {
+	public List<Complaint> getComplaint() {
 		return complaint;
 	}
 
-	public void setComplaint(Complaint complaint) {
+	public void setComplaint(List<Complaint> complaint) {
 		this.complaint = complaint;
 	}
 
@@ -118,13 +110,7 @@ public class Customer {
 		this.lastname = lastname;
 	}
 
-	public Address getAddr() {
-		return addr;
-	}
-
-	public void setAddr(Address addr) {
-		this.addr = addr;
-	}
+	
 
 	public int getMobileno() {
 		return mobileno;
@@ -134,11 +120,11 @@ public class Customer {
 		this.mobileno = mobileno;
 	}
 
-	public Payment getAcct() {
+	public BankAccount getAcct() {
 		return acct;
 	}
 
-	public void setAcct(Payment acct) {
+	public void setAcct(BankAccount acct) {
 		this.acct = acct;
 	}
 
