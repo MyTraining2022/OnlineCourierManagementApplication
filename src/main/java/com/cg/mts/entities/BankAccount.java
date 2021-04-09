@@ -6,43 +6,38 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 @Entity
 public class BankAccount {
-@Id
-	private int accountno;
+    
+	@Id
+	private int accountNo;
+	
 	private String accountHolderName;
 	private String accountType;
+	
+	
 	@ManyToOne
-	@JoinColumn(name="customerid")
+	@JoinColumn(name="customerId")
 	private Customer customer;
 	
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public BankAccount() {
-		super();
-		this.accountno = accountno;
-		this.accountHolderName = accountHolderName;
-		this.accountType = accountType;
-	}
 	
-	public BankAccount(int accountno, String accountHolderName, String accountType) {
+	public BankAccount() {
+		
+	}
+
+	
+	public BankAccount(int accountNo, String accountHolderName, String accountType) {
 		super();
-		this.accountno = accountno;
+		this.accountNo = accountNo;
 		this.accountHolderName = accountHolderName;
 		this.accountType = accountType;
 	}
 
-	public int getAccountno() {
-		return accountno;
+	public int getAccountNo() {
+		return accountNo;
 	}
 
-	public void setAccountno(int accountno) {
-		this.accountno = accountno;
+	public void setAccountNo(int accountNo) {
+		this.accountNo = accountNo;
 	}
 
 	public String getAccountHolderName() {
@@ -60,4 +55,14 @@ public class BankAccount {
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	
 }

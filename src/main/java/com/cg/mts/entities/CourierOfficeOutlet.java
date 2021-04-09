@@ -13,76 +13,86 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="office")
+@Table(name="CourierOfficeOutlet")
 public class CourierOfficeOutlet {
 	
 	@Id
-	private int officeid;
+	private int officeId;
 	
 	private LocalTime openingTime;
 	private LocalTime closingTime;	
 	
 	@OneToMany(mappedBy="office",cascade=CascadeType.ALL)
-	private List<OfficeStaffMember> staffmembers= new ArrayList<>();
+	private List<OfficeStaffMember> staffMembers= new ArrayList<>();
     
 	
-	//@OneToOne(cascade=CascadeType.ALL)
-	//@JoinColumn(name="addressid")
-	//private Address addre;
+	@OneToOne
+	@JoinColumn(name="addressId")
+	private Address address;
 	
 	
 	public CourierOfficeOutlet() {
 		
 	}
 
-	public CourierOfficeOutlet(int officeid, LocalTime openingTime, LocalTime closingTime) {
+
+	public CourierOfficeOutlet(int officeId, LocalTime openingTime, LocalTime closingTime) {
 		super();
-		this.officeid = officeid;
+		this.officeId = officeId;
 		this.openingTime = openingTime;
 		this.closingTime = closingTime;
 	}
 
-	public int getOfficeid() {
-		return officeid;
+
+	public int getOfficeId() {
+		return officeId;
 	}
 
-	public void setOfficeid(int officeid) {
-		this.officeid = officeid;
+
+	public void setOfficeId(int officeId) {
+		this.officeId = officeId;
 	}
+
 
 	public LocalTime getOpeningTime() {
 		return openingTime;
 	}
 
+
 	public void setOpeningTime(LocalTime openingTime) {
 		this.openingTime = openingTime;
 	}
+
 
 	public LocalTime getClosingTime() {
 		return closingTime;
 	}
 
+
 	public void setClosingTime(LocalTime closingTime) {
 		this.closingTime = closingTime;
 	}
 
-	public List<OfficeStaffMember> getStaffmembers() {
-		return staffmembers;
+
+	public List<OfficeStaffMember> getStaffMembers() {
+		return staffMembers;
 	}
 
-	public void setStaffmembers(List<OfficeStaffMember> staffmembers) {
-		this.staffmembers = staffmembers;
+
+	public void setStaffMembers(List<OfficeStaffMember> staffMembers) {
+		this.staffMembers = staffMembers;
 	}
 
-	
 
-	@Override
-	public String toString() {
-		return "CourierOfficeOutlet [officeid=" + officeid + ", openingTime=" + openingTime + ", closingTime="
-				+ closingTime + ", staffmembers=" + staffmembers + "]";
+	public Address getAddress() {
+		return address;
 	}
-	
-	
+
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
 	
 	
 

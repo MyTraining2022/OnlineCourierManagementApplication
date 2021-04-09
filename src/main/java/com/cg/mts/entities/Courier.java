@@ -17,88 +17,107 @@ public class Courier {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private int courierid;
-	
-	private CourierStatus status;
+	private int courierId;
 	
 	@GeneratedValue(strategy= GenerationType.AUTO)
-	private int consignmentno;
+	private int consignmentNo;
 	
 	private LocalDate initiatedDate;
+	private CourierStatus status;
 	private LocalDate deliveredDate;
 	
 	@ManyToOne
-	@JoinColumn(name= "customer_id")
+	//@JoinColumn(name= "customer_id")
 	private Customer sender;
 	
 	@ManyToOne
-	@JoinColumn(name= "customer_id")
+	//@JoinColumn(name= "customer_id")
 	private Customer receiver;
 	
+	@OneToOne
+	@JoinColumn(name="paymentId")
+	private Payment payment;
+	
 	public Courier() {
-		super();
+		
 	}
-	
-	
-	public Courier(int courierid, CourierStatus status, int consignmentno, LocalDate initiatedDate,
-			LocalDate deliveredDate) {
+
+	public Courier(CourierStatus status, LocalDate initiatedDate,LocalDate deliveredDate) {
 		super();
-		this.courierid = courierid;
+		
 		this.status = status;
-		this.consignmentno = consignmentno;
 		this.initiatedDate = initiatedDate;
 		this.deliveredDate = deliveredDate;
 	}
 
-	public int getCourierid() {
-		return courierid;
+	
+	public int getCourierId() {
+		return courierId;
 	}
-	public void setCourierid(int courierid) {
-		this.courierid = courierid;
+
+	public void setCourierId(int courierId) {
+		this.courierId = courierId;
 	}
-	public CourierStatus getStatus() {
-		return status;
+
+	public int getConsignmentNo() {
+		return consignmentNo;
 	}
-	public void setStatus(CourierStatus status) {
-		this.status = status;
+
+	public void setConsignmentNo(int consignmentNo) {
+		this.consignmentNo = consignmentNo;
 	}
-	public Customer getSender() {
-		return sender;
-	}
-	public void setSender(Customer sender) {
-		this.sender = sender;
-	}
-	public Customer getReceiver() {
-		return receiver;
-	}
-	public void setReceiver(Customer receiver) {
-		this.receiver = receiver;
-	}
-	public int getConsignmentno() {
-		return consignmentno;
-	}
-	public void setConsignmentno(int consignmentno) {
-		this.consignmentno = consignmentno;
-	}
+
 	public LocalDate getInitiatedDate() {
 		return initiatedDate;
 	}
+
 	public void setInitiatedDate(LocalDate initiatedDate) {
 		this.initiatedDate = initiatedDate;
 	}
+
+	public CourierStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(CourierStatus status) {
+		this.status = status;
+	}
+
 	public LocalDate getDeliveredDate() {
 		return deliveredDate;
 	}
+
 	public void setDeliveredDate(LocalDate deliveredDate) {
 		this.deliveredDate = deliveredDate;
 	}
 
-	@Override
-	public String toString() {
-		return "Courier [Courier ID=" + courierid + ", Status=" + status + ", Consignment No=" + consignmentno
-				+ ", Initiated Date=" + initiatedDate + ", Delivered Date=" + deliveredDate + ", Sender=" + sender
-				+ ", Receiver=" + receiver + "]";
+	public Customer getSender() {
+		return sender;
 	}
 
+	public void setSender(Customer sender) {
+		this.sender = sender;
+	}
+
+	public Customer getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(Customer receiver) {
+		this.receiver = receiver;
+	}
+	
+	public Payment getPayment() {
+		return payment;
+	}
+
+	public void setPayment(Payment payment) {
+		this.payment = payment;
+	}
+
+	
+	
+	
+	
 
 }

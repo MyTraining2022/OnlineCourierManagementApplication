@@ -15,31 +15,41 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="manager")
-//@DiscriminatorValue("MGR")
-public class Manager { // extends OfficeStaffMember {
+@DiscriminatorValue("MGR")
+public class Manager extends OfficeStaffMember {
 	
-	@Id
+	/*@Id
 	private int managerId;
 	private String mangName;
 	
 	
 	@OneToMany
-	private Set<OfficeStaffMember> staff = new HashSet<>(); 
+	private Set<OfficeStaffMember> staff = new HashSet<>(); */
 	
 	
 	
 	@ManyToOne
-	@JoinColumn(name="officeid")
+	@JoinColumn(name="officeId")
 	private CourierOfficeOutlet office;
 	
 	
 	public Manager() {
 		
 	}
+
+
+	public CourierOfficeOutlet getOffice() {
+		return office;
+	}
+
+
+	public void setOffice(CourierOfficeOutlet office) {
+		this.office = office;
+	}
 	
 	
 
-	public Manager(int managerId, String mangName) {
+	/*public Manager(int managerId, String mangName) {
 		super();
 		this.managerId = managerId;
 		this.mangName = mangName;
@@ -90,6 +100,6 @@ public class Manager { // extends OfficeStaffMember {
 	public void addStaff(OfficeStaffMember staff) {
 		staff.setMgr(this);			//this will avoid nested cascade and also serves the purpose to avoid cyclic references. 
 		this.getStaff().add(staff);
-	}
+	}*/
 
 }
