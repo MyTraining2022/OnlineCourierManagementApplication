@@ -1,5 +1,6 @@
 package com.cg.mts.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,33 +12,33 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="customer")
+@Table(name = "customer")
 public class Customer {
-    @Id
+	@Id
 	private int customerid;
 	private int aadharno;
 	private String firstname;
 	private String lastname;
-	
-	@OneToMany(mappedBy="customer",cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private Complaint complaint;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="houseNo")
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "houseNo")
 	private Address addr;
-	
+
 	private int mobileno;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="paymentno")
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "paymentno")
 	private Payment acct;
-	
-	@OneToMany(mappedBy="sender",cascade=CascadeType.ALL)
-	private List<Courier>  courierSender;
-	
-	@OneToMany(mappedBy="receiver",cascade=CascadeType.ALL)
-	private List<Courier> courierReceiver;
-	
+
+	@OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+	private List<Courier> courierSender = new ArrayList<>();
+
+	@OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
+	private List<Courier> courierReceiver = new ArrayList<>();
+
 	public Customer() {
 		super();
 		this.customerid = customerid;
@@ -48,7 +49,7 @@ public class Customer {
 		this.mobileno = mobileno;
 		this.acct = acct;
 	}
-	
+
 	public Customer(int customerid, int aadharno, String firstname, String lastname, Address addr, int mobileno,
 			Payment acct) {
 		super();
@@ -59,6 +60,30 @@ public class Customer {
 		this.addr = addr;
 		this.mobileno = mobileno;
 		this.acct = acct;
+	}
+
+	public Complaint getComplaint() {
+		return complaint;
+	}
+
+	public void setComplaint(Complaint complaint) {
+		this.complaint = complaint;
+	}
+
+	public List<Courier> getCourierSender() {
+		return courierSender;
+	}
+
+	public void setCourierSender(List<Courier> courierSender) {
+		this.courierSender = courierSender;
+	}
+
+	public List<Courier> getCourierReceiver() {
+		return courierReceiver;
+	}
+
+	public void setCourierReceiver(List<Courier> courierReceiver) {
+		this.courierReceiver = courierReceiver;
 	}
 
 	public int getCustomerid() {
@@ -122,5 +147,5 @@ public class Customer {
 		return "Customer [customerid=" + customerid + ", aadharno=" + aadharno + ", firstname=" + firstname
 				+ ", lastname=" + lastname + ", mobileno=" + mobileno + "]";
 	}
-	
+
 }

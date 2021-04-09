@@ -13,6 +13,14 @@ public class Payment {
 	private Customer customer;
 	
 
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
 	public Payment() {
 		super();
 		this.paymentno = paymentno;
