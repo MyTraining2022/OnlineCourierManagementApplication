@@ -15,22 +15,22 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="OfficeStaffMember")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+/*@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="emp_type",discriminatorType=DiscriminatorType.STRING)   
-@DiscriminatorValue("EMP")
+@DiscriminatorValue("EMP")*/
 public class OfficeStaffMember {
 	
 	@Id
-	private int empid;
+	private int empId;
 	private String name;
 	private String role;
 	
 	
-	//@OneToOne(cascade=CascadeType.ALL)
-	//@JoinColumn(name="addressid")
-	//private Address address;
 	
-
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="houseNo")
+	private Address address;
+	
 	
 	@OneToOne
 	@JoinColumn(name="managerId")
@@ -45,17 +45,17 @@ public class OfficeStaffMember {
 	
 	public OfficeStaffMember(int empid, String name, String role) {
 		super();
-		this.empid = empid;
+		this.empId = empid;
 		this.name = name;
 		this.role = role;
 	}
 
 	public int getEmpid() {
-		return empid;
+		return empId;
 	}
 
 	public void setEmpid(int empid) {
-		this.empid = empid;
+		this.empId = empid;
 	}
 
 	public String getName() {
@@ -74,14 +74,36 @@ public class OfficeStaffMember {
 		this.role = role;
 	}
 	
+	public Address getAddress() {
+		return address;
+	}
 
 
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 
+	/*public void addEmployee(OfficeStaffMember employee) {
+		employee.setempi(this);
+		this.getEmployees().add(employee);
+		}*/
 	
+	
+	public Manager getMgr() {
+		return mgr;
+	}
+
+
+	public void setMgr(Manager mgr) {
+		this.mgr = mgr;
+	}
+
+
 	@Override
 	public String toString() {
-		return "OfficeStaffMember [empid=" + empid + ", name=" + name + ", role=" + role +  "]";
+		return "OfficeStaffMember [empid=" + empId + ", name=" + name + ", role=" + role + ", Address=" + address
+				+  "]";
 	}
 
 	
