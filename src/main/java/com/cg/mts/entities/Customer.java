@@ -6,30 +6,31 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name="customer")
 public class Customer {
-	
-	@Id
+    @Id
 	private int customerid;
+	private int aadharno;
 	private String firstname;
 	private String lastname;
-	private int mobileno;
 	
+	@OneToMany(mappedBy="customer",cascade=CascadeType.ALL)
+	private Complaint complaint;
 	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="houseNo")
 	private Address addr;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="complaintid")
-	private Complaint complaint;
+	private int mobileno;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="paymentno")
+	private Payment acct;
 	
 	@OneToMany(mappedBy="sender",cascade=CascadeType.ALL)
 	private List<Courier>  courierSender;
@@ -37,134 +38,89 @@ public class Customer {
 	@OneToMany(mappedBy="receiver",cascade=CascadeType.ALL)
 	private List<Courier> courierReceiver;
 	
-	
-	
-	
 	public Customer() {
-		
-	}
-	
-	
-	
-
-
-	public Customer(int customerid, String firstname, String lastname, int mobileno) {
 		super();
 		this.customerid = customerid;
+		this.aadharno = aadharno;
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.addr = addr;
 		this.mobileno = mobileno;
+		this.acct = acct;
 	}
-
+	
+	public Customer(int customerid, int aadharno, String firstname, String lastname, Address addr, int mobileno,
+			Payment acct) {
+		super();
+		this.customerid = customerid;
+		this.aadharno = aadharno;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.addr = addr;
+		this.mobileno = mobileno;
+		this.acct = acct;
+	}
 
 	public int getCustomerid() {
 		return customerid;
 	}
 
-
 	public void setCustomerid(int customerid) {
 		this.customerid = customerid;
 	}
 
+	public int getAadharno() {
+		return aadharno;
+	}
+
+	public void setAadharno(int aadharno) {
+		this.aadharno = aadharno;
+	}
 
 	public String getFirstname() {
 		return firstname;
 	}
 
-
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
-
 
 	public String getLastname() {
 		return lastname;
 	}
 
-
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-
-
-	public int getMobileno() {
-		return mobileno;
-	}
-
-
-	public void setMobileno(int mobileno) {
-		this.mobileno = mobileno;
-	}
-
 
 	public Address getAddr() {
 		return addr;
 	}
 
-
 	public void setAddr(Address addr) {
 		this.addr = addr;
 	}
 
-	
-	
-
-	
-	public Complaint getComplaint() {
-		return complaint;
+	public int getMobileno() {
+		return mobileno;
 	}
 
-
-
-
-
-	public void setComplaint(Complaint complaint) {
-		this.complaint = complaint;
+	public void setMobileno(int mobileno) {
+		this.mobileno = mobileno;
 	}
 
-
-
-
-
-	public List<Courier> getCourierSender() {
-		return courierSender;
+	public Payment getAcct() {
+		return acct;
 	}
 
-
-
-
-
-	public void setCourierSender(List<Courier> courierSender) {
-		this.courierSender = courierSender;
+	public void setAcct(Payment acct) {
+		this.acct = acct;
 	}
-
-
-
-
-
-	public List<Courier> getCourierReceiver() {
-		return courierReceiver;
-	}
-
-
-
-
-
-	public void setCourierReceiver(List<Courier> courierReceiver) {
-		this.courierReceiver = courierReceiver;
-	}
-
-
-
-
 
 	@Override
 	public String toString() {
-		return "Customer [customerid=" + customerid + ", firstname=" + firstname + ", lastname=" + lastname
-				+ ", mobileno=" + mobileno + ", Address=" + addr + "]";
+		return "Customer [customerid=" + customerid + ", aadharno=" + aadharno + ", firstname=" + firstname
+				+ ", lastname=" + lastname + ", mobileno=" + mobileno + "]";
 	}
 	
-	
-	
-
 }
