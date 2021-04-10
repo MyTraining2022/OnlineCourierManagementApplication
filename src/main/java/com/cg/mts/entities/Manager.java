@@ -11,24 +11,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="manager")
-@DiscriminatorValue("MGR")
-public class Manager extends OfficeStaffMember {
+//@DiscriminatorValue("MGR")
+public class Manager { //extends OfficeStaffMember {
 	
-	/*@Id
+	@Id
 	private int managerId;
 	private String mangName;
 	
 	
-	@OneToMany
+	/*@OneToMany
 	private Set<OfficeStaffMember> staff = new HashSet<>(); */
 	
 	
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name="officeId")
 	private CourierOfficeOutlet office;
 	
@@ -37,7 +38,13 @@ public class Manager extends OfficeStaffMember {
 		
 	}
 
-
+	public Manager(int managerId, String mangName) {
+		super();
+		this.managerId = managerId;
+		this.mangName = mangName;
+	}
+	
+	
 	public CourierOfficeOutlet getOffice() {
 		return office;
 	}
@@ -45,14 +52,6 @@ public class Manager extends OfficeStaffMember {
 
 	public void setOffice(CourierOfficeOutlet office) {
 		this.office = office;
-	}
-	
-	
-
-	/*public Manager(int managerId, String mangName) {
-		super();
-		this.managerId = managerId;
-		this.mangName = mangName;
 	}
 
 
@@ -77,7 +76,7 @@ public class Manager extends OfficeStaffMember {
 	}
 
 
-	public Set<OfficeStaffMember> getStaff() {
+	/*public Set<OfficeStaffMember> getStaff() {
 		return staff;
 	}
 
@@ -94,10 +93,10 @@ public class Manager extends OfficeStaffMember {
 
 	public void setOffice(CourierOfficeOutlet office) {
 		this.office = office;
-	}
+	}*/
 
 	
-	public void addStaff(OfficeStaffMember staff) {
+	/*public void addStaff(OfficeStaffMember staff) {
 		staff.setMgr(this);			//this will avoid nested cascade and also serves the purpose to avoid cyclic references. 
 		this.getStaff().add(staff);
 	}*/
