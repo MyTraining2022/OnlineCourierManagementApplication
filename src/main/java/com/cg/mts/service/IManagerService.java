@@ -21,8 +21,8 @@ public interface IManagerService {
 	public OfficeStaffMember getStaffMember(int empid) throws StaffMemberNotFoundException;
 
 	
-	public CourierStatus getCourierStatus(int courierId) ;
+	public boolean getCourierStatus(int courierId) ;
 	
-	public Complaint getRegistedComplaint(int complaintid) ;//throws ComplaintNotFoundException;
+	public boolean getRegistedComplaint(int complaintid) ;//throws ComplaintNotFoundException;
 	public List<Complaint> getAllComplaints();
 }

@@ -24,7 +24,7 @@ public class OfficeStaffMember {
 	private int empId;
 	private String name;
 	private String role;
-	//private int managerId;
+	
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "addressId")
@@ -49,7 +49,7 @@ public class OfficeStaffMember {
 		this.role = role;
 		this.address = address;
 		this.office = office;
-		//this.managerId=managerId;
+		
 	}
 
 	

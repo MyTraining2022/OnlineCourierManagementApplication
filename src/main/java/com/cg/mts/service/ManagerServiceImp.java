@@ -14,6 +14,7 @@ import com.cg.mts.entities.Courier;
 import com.cg.mts.entities.CourierOfficeOutlet;
 import com.cg.mts.entities.CourierStatus;
 import com.cg.mts.entities.OfficeStaffMember;
+import com.cg.mts.exceptions.ComplaintNotFoundException;
 import com.cg.mts.exceptions.CourierNotFoundException;
 import com.cg.mts.exceptions.DuplicateStaffMemberFoundException;
 import com.cg.mts.exceptions.StaffMemberNotFoundException;
@@ -80,7 +81,7 @@ public class ManagerServiceImp implements IManagerService{
 
 
 	@Override
-	public CourierStatus getCourierStatus(int courierId)  {
+	public boolean getCourierStatus(int courierId)  {
 		
 		/*if(!(courierRepo.existsById(courier.getCourierId()))) {
 			return null ;
@@ -91,10 +92,10 @@ public class ManagerServiceImp implements IManagerService{
 		
 		Optional<Courier> courier = courierRepo.findById(courierId);
 		if(courier.isPresent()) {
-			return courier.get().getStatus();
+			return true;
 		}
 		else {
-			return null;
+			throw new CourierNotFoundException("Courier is not found with"+courierId);
 		}
 		
 	}
@@ -103,12 +104,15 @@ public class ManagerServiceImp implements IManagerService{
 	
 	
 	@Override
-	public Complaint getRegistedComplaint(int complaintid) {
+	public boolean getRegistedComplaint(int complaintid) {
 		Optional<Complaint> complaint = complaintRepo.findById(complaintid);
 		if(complaint.isPresent()) {
-			return complaint.get();
+			//return complaint.get();
+			return true;
 		}
-		return null;
+		else {
+			throw new ComplaintNotFoundException("Not able to find complaintId","Try again");
+		}
 	}
 
 	@Override
