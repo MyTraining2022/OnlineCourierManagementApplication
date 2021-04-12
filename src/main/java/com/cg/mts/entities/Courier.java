@@ -2,7 +2,10 @@ package com.cg.mts.entities;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,10 +22,13 @@ public class Courier {
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int courierId;
 	
+	@Column(unique = true)
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int consignmentNo;
 	
 	private LocalDate initiatedDate;
+	
+	@Enumerated(EnumType.STRING)
 	private CourierStatus status;
 	private LocalDate deliveredDate;
 	
