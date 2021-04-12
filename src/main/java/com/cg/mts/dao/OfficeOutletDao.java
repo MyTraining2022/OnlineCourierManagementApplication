@@ -7,28 +7,22 @@ import org.springframework.stereotype.Component;
 
 import com.cg.mts.entities.CourierOfficeOutlet;
 import com.cg.mts.entities.OfficeStaffMember;
-import com.cg.mts.exceptions.OutletNotFoundException;
-import com.cg.mts.repository.CourierOfficeOutletRepository;
+import com.cg.mts.exception.OutletNotFoundException;
+import com.cg.mts.repository.OfficeOutletRepository;
 
 @Component
 public class OfficeOutletDao implements IOfficeOutletDao{
 
 	@Autowired
-	CourierOfficeOutletRepository officeRepo;
+	OfficeOutletRepository officeRepo;
 	
 	@Override
-	public void addNewOffice(CourierOfficeOutlet officeOutlet) {
-		if(!officeRepo.existsById(officeOutlet.getOfficeId()))
+	public boolean addNewOffice(CourierOfficeOutlet officeOutlet) {
+		if(!officeRepo.existsById(officeOutlet.getOfficeId())) {
 			officeRepo.save(officeOutlet);
-		
-	}
-
-	@Override
-	public void removeNewOffice(CourierOfficeOutlet officeOutlet) {
-		
-		if(officeRepo.existsById(officeOutlet.getOfficeId()))
-			officeRepo.deleteById(officeOutlet.getOfficeId());
-		
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -42,6 +36,15 @@ public class OfficeOutletDao implements IOfficeOutletDao{
 	public List<CourierOfficeOutlet> getAllOfficesData() {
 		
 		return officeRepo.findAll();
+	}
+
+	@Override
+	public boolean removeNewOffice(int officeId) {
+		if(officeRepo.existsById(officeId)) {
+			officeRepo.deleteById(officeId);
+			return true;
+		}
+		return false;
 	}
 
 }

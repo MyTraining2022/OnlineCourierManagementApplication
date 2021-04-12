@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="CourierOfficeOutlet")
 public class CourierOfficeOutlet {
@@ -19,7 +21,9 @@ public class CourierOfficeOutlet {
 	@Id
 	private int officeId;
 	
+	@JsonFormat(pattern= "HH:mm:ss")
 	private LocalTime openingTime;
+	@JsonFormat(pattern= "HH:mm:ss")
 	private LocalTime closingTime;	
 	
 	@OneToMany(mappedBy="office",cascade=CascadeType.ALL)
@@ -92,8 +96,4 @@ public class CourierOfficeOutlet {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-
-	
-	
-
 }

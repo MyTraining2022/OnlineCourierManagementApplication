@@ -6,28 +6,28 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.mts.dao.OfficeOutletDao;
+import com.cg.mts.dao.IOfficeOutletDao;
 import com.cg.mts.entities.CourierOfficeOutlet;
 import com.cg.mts.entities.OfficeStaffMember;
-import com.cg.mts.exceptions.OutletClosedException;
-import com.cg.mts.exceptions.OutletNotFoundException;
+import com.cg.mts.exception.OutletClosedException;
+import com.cg.mts.exception.OutletNotFoundException;
 
 @Service
 public class OfficeOutletService implements IOfficeOutletService {
 
 	@Autowired
-	OfficeOutletDao officeDao;
+	IOfficeOutletDao officeDao;
 	
 	@Override
-	public void addNewOffice(CourierOfficeOutlet officeOutlet) {
+	public boolean addNewOffice(CourierOfficeOutlet officeOutlet) {
 		
-		officeDao.addNewOffice(officeOutlet);
+		return officeDao.addNewOffice(officeOutlet);
 	}
 
 	@Override
-	public void removeNewOffice(CourierOfficeOutlet officeOutlet) {
+	public boolean removeNewOffice(int officeId) {
 		
-		officeDao.removeNewOffice(officeOutlet);
+		return officeDao.removeNewOffice(officeId);
 	}
 
 	@Override
@@ -37,12 +37,6 @@ public class OfficeOutletService implements IOfficeOutletService {
 	}
 	
 	@Override
-	public List<OfficeStaffMember> getStaffMembersByOfficeId(int officeId) throws OutletNotFoundException {
-		
-		return officeDao.getOfficeInfo(officeId).getStaffMembers();
-	}
-
-	@Override
 	public List<CourierOfficeOutlet> getAllOfficesData() {
 		
 		return officeDao.getAllOfficesData();
@@ -50,16 +44,16 @@ public class OfficeOutletService implements IOfficeOutletService {
 
 	@Override
 	public boolean isOfficeOpen(CourierOfficeOutlet officeOutlet) throws OutletClosedException {
-		if(!(officeOutlet.getOpeningTime() == LocalTime.now())) {
-			throw new OutletClosedException("Office  is already closed");
+		if(LocalTime.now().isAfter(officeOutlet.getOpeningTime()) && LocalTime.now().isBefore(officeOutlet.getClosingTime())) {
+			return true;
 		}
-		return true;
+		throw new OutletClosedException("Courier Office is closed");
 	}
 
 	@Override
-	public boolean isOfficeClosed(CourierOfficeOutlet officeOutlet) {
-		if(officeOutlet.getClosingTime() == LocalTime.now())
-			return true;
+	public boolean isOfficeClosed(CourierOfficeOutlet officeOutlet) throws OutletClosedException {
+		if(LocalTime.now().isBefore(officeOutlet.getOpeningTime()) && LocalTime.now().isAfter(officeOutlet.getClosingTime()))
+			throw new OutletClosedException("Courier Office is closed");
 		return false;
 	}
 
