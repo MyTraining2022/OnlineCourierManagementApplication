@@ -24,8 +24,8 @@ public class Manager { //extends OfficeStaffMember {
 	private String mangName;
 	
 	
-	/*@OneToMany
-	private Set<OfficeStaffMember> staff = new HashSet<>(); */
+	@OneToMany(mappedBy="manager",cascade=CascadeType.ALL)
+	private Set<OfficeStaffMember> staff = new HashSet<>();
 	
 	
 	
@@ -74,31 +74,21 @@ public class Manager { //extends OfficeStaffMember {
 	public void setMangName(String mangName) {
 		this.mangName = mangName;
 	}
-
-
-	/*public Set<OfficeStaffMember> getStaff() {
+	
+	
+	
+	
+     public Set<OfficeStaffMember> getStaff() {
 		return staff;
 	}
-
 
 	public void setStaff(Set<OfficeStaffMember> staff) {
 		this.staff = staff;
 	}
 
-
-	public CourierOfficeOutlet getOffice() {
-		return office;
-	}
-
-
-	public void setOffice(CourierOfficeOutlet office) {
-		this.office = office;
-	}*/
-
-	
-	/*public void addStaff(OfficeStaffMember staff) {
-		staff.setMgr(this);			//this will avoid nested cascade and also serves the purpose to avoid cyclic references. 
+	public void addStaff(OfficeStaffMember staff) {
+		staff.setManager(this);		//this will avoid nested cascade and also serves the purpose to avoid cyclic references. 
 		this.getStaff().add(staff);
-	}*/
+	}
 
 }
