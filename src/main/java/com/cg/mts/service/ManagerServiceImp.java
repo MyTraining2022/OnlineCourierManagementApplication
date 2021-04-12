@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.mts.dao.IStaffMemberDao;
-import com.cg.mts.dao.StaffMemberDao;
+import com.cg.mts.dao.StaffMemberDaoImp;
 import com.cg.mts.entities.Complaint;
 import com.cg.mts.entities.Courier;
 import com.cg.mts.entities.CourierOfficeOutlet;
 import com.cg.mts.entities.CourierStatus;
 import com.cg.mts.entities.OfficeStaffMember;
+import com.cg.mts.exceptions.CourierNotFoundException;
+import com.cg.mts.exceptions.DuplicateStaffMemberFoundException;
 import com.cg.mts.exceptions.StaffMemberNotFoundException;
 import com.cg.mts.repository.ComplaintRepository;
 import com.cg.mts.repository.CourierOfficeOutletRepository;
@@ -21,7 +23,7 @@ import com.cg.mts.repository.CourierRepository;
 import com.cg.mts.repository.StaffMemberRepository;
 
 @Service
-public class ManagerService implements IManagerService{
+public class ManagerServiceImp implements IManagerService{
 
 	@Autowired
 	StaffMemberRepository StaffMemberRepo;
@@ -36,55 +38,70 @@ public class ManagerService implements IManagerService{
 	CourierOfficeOutletRepository  CourierOfficeOutletRepo;
 	
 	@Autowired
-	StaffMemberDao  dao;
+	StaffMemberDaoImp  StaffMemberDao;
 	
-	
+	@Autowired
+	StaffMemberRepository staffReposi;
 	
 	@Override
-	public OfficeStaffMember addStaffMember(OfficeStaffMember staffmember) {
+	public boolean addStaffMember(OfficeStaffMember staffmember) {
 		
 		if(StaffMemberRepo.existsById(staffmember.getEmpId())) {
-			
+			throw new DuplicateStaffMemberFoundException("Staff id "+staffmember.getEmpId()+" is present in database." );
 		}
-		StaffMemberRepo.save(staffmember);
-		
-		return staffmember;
-		
+		else {
+			StaffMemberRepo.save(staffmember);
+			return true;
+		}
 	}
 
 	@Override
-	public void removeStaffMember(OfficeStaffMember staffmember) {
-		StaffMemberRepo.deleteById(staffmember.getEmpId());
+	public boolean removeStaffMember(int id) {
 		
+		return StaffMemberDao.removeStaffMember(id);
+		
+		/*if(StaffMemberRepo.existsById(id)) {
+			StaffMemberRepo.deleteById(id);
+			return true;
+		}
+		else {
+			throw new StaffMemberNotFoundException("Staff id "+id+" is not present in database." );
+		}*/
+		
+		
+	
 	}
 
 	@Override
 	public OfficeStaffMember getStaffMember(int empid) throws StaffMemberNotFoundException {
-		return dao.getStaffMember(empid);
+		return StaffMemberDao.getStaffMember(empid);
 		
 	}
 
-	@Override
-	public List<OfficeStaffMember> getAllStaffMembers(int officeId) {
-		/*List<OfficeStaffMember> lst = new ArrayList<>();
-		if(CourierOfficeOutletRepo.existsById(officeId)) {
-			if(StaffMemberRepo.)
-		}*/
-		return null;
-	}
 
 	@Override
-	public String getCourierStatus(Courier courier) {
-		String str = null;
-		if(courierRepo.existsById(courier.getCourierId())) {
-			str = courier.getStatus().toString();
-			return str;
+	public CourierStatus getCourierStatus(int courierId)  {
+		
+		/*if(!(courierRepo.existsById(courier.getCourierId()))) {
+			return null ;
+		} 
+		else {
+			return courierRepo.getStatus(courier.getCourierId());
+		}*/
+		
+		Optional<Courier> courier = courierRepo.findById(courierId);
+		if(courier.isPresent()) {
+			return courier.get().getStatus();
+		}
+		else {
+			return null;
 		}
 		
-		return str;
-		
 	}
 
+	
+	
+	
 	@Override
 	public Complaint getRegistedComplaint(int complaintid) {
 		Optional<Complaint> complaint = complaintRepo.findById(complaintid);
@@ -96,7 +113,7 @@ public class ManagerService implements IManagerService{
 
 	@Override
 	public List<Complaint> getAllComplaints() {
-		List<Complaint> lst = complaintRepo.findAll();
+		List<Complaint> lst = (List<Complaint>) complaintRepo.findAll();
 		if(lst.isEmpty()) {
 			return null;
 		}
