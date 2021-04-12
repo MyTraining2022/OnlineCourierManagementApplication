@@ -30,6 +30,8 @@ public class CourierOfficeOutlet {
 	@JoinColumn(name="addressId")
 	private Address address;
 	
+	@OneToOne()
+	private Manager managerw;
 	
 	public CourierOfficeOutlet() {
 		

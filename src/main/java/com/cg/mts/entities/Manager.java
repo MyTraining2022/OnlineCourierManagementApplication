@@ -17,15 +17,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="manager")
 //@DiscriminatorValue("MGR")
-public class Manager { //extends OfficeStaffMember {
+public class Manager extends OfficeStaffMember {
 	
-	@Id
-	private int managerId;
-	private String mangName;
-	
-	
-	/*@OneToMany(mappedBy="manager")
-	private Set<OfficeStaffMember> staff = new HashSet<>();*/
 	
 	
 	
@@ -38,11 +31,6 @@ public class Manager { //extends OfficeStaffMember {
 		
 	}
 
-	public Manager(int managerId, String mangName) {
-		super();
-		this.managerId = managerId;
-		this.mangName = mangName;
-	}
 	
 	
 	public CourierOfficeOutlet getOffice() {
@@ -54,29 +42,6 @@ public class Manager { //extends OfficeStaffMember {
 		this.office = office;
 	}
 
-
-
-	public int getManagerId() {
-		return managerId;
-	}
-
-
-	public void setManagerId(int managerId) {
-		this.managerId = managerId;
-	}
-
-
-	public String getMangName() {
-		return mangName;
-	}
-
-
-	public void setMangName(String mangName) {
-		this.mangName = mangName;
-	}
-	
-	
-	
 	
     /* public Set<OfficeStaffMember> getStaff() {
 		return staff;

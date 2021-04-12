@@ -1,5 +1,8 @@
 package com.cg.mts.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -10,18 +13,20 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "OfficeStaffMember")
-//@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 //@DiscriminatorColumn(name = "emp_type", discriminatorType = DiscriminatorType.STRING)
 //@DiscriminatorValue("EMP")
 public class OfficeStaffMember {
 
 	@Id
 	private int empId;
+	
 	private String name;
 	private String role;
 	
@@ -34,21 +39,21 @@ public class OfficeStaffMember {
 	@JoinColumn(name = "officeId")
 	private CourierOfficeOutlet office;
 
-	@ManyToOne()
+	@ManyToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name="managerId")
-	private Manager manager;
+	private OfficeStaffMember manager;
+	
+	
 
 	public OfficeStaffMember() {
 
 	}
 	
-	public OfficeStaffMember(int empId, String name, String role, Address address, CourierOfficeOutlet office) {
+	public OfficeStaffMember(int empId, String name, String role) {
 		super();
 		this.empId = empId;
 		this.name = name;
 		this.role = role;
-		this.address = address;
-		this.office = office;
 		
 	}
 
@@ -98,21 +103,23 @@ public class OfficeStaffMember {
 	
 	
 	
-	public Manager getManager() {
+	public OfficeStaffMember getManager() {
 		return manager;
 	}
 
-	public void setManager(Manager manager) {
+	public void setManager(OfficeStaffMember manager) {
 		this.manager = manager;
 	}
 
-	
-
-	@Override
-	public String toString() {
-		return "OfficeStaffMember [empId=" + empId + ", name=" + name + ", role=" + role + ", address=" + address
-				+ ", office=" + office +  "]";
+	/*public Set<OfficeStaffMember> getSubStaff() {
+		return subStaff;
 	}
+
+	public void setSubStaff(Set<OfficeStaffMember> subStaff) {
+		this.subStaff = subStaff;
+	}*/
+
+	
 
 
 	
