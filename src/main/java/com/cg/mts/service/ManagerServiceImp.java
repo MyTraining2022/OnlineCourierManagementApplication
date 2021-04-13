@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.cg.mts.dao.IStaffMemberDao;
@@ -61,14 +63,6 @@ public class ManagerServiceImp implements IManagerService{
 		
 		return StaffMemberDao.removeStaffMember(id);
 		
-		/*if(StaffMemberRepo.existsById(id)) {
-			StaffMemberRepo.deleteById(id);
-			return true;
-		}
-		else {
-			throw new StaffMemberNotFoundException("Staff id "+id+" is not present in database." );
-		}*/
-		
 		
 	
 	}
@@ -81,7 +75,7 @@ public class ManagerServiceImp implements IManagerService{
 
 
 	@Override
-	public boolean getCourierStatus(int courierId)  {
+	public CourierStatus getCourierStatus(int courierId)  {
 		
 		/*if(!(courierRepo.existsById(courier.getCourierId()))) {
 			return null ;
@@ -90,14 +84,12 @@ public class ManagerServiceImp implements IManagerService{
 			return courierRepo.getStatus(courier.getCourierId());
 		}*/
 		
-		Optional<Courier> courier = courierRepo.findById(courierId);
-		if(courier.isPresent()) {
-			return true;
+			Optional<Courier> courier = courierRepo.findById(courierId);
+			if(courier.isPresent()) {
+			return  courier.get().getStatus();
+			}else {
+			throw new CourierNotFoundException("CourierId is not in database"+courierId);
 		}
-		else {
-			throw new CourierNotFoundException("Courier is not found with"+courierId);
-		}
-		
 	}
 
 	

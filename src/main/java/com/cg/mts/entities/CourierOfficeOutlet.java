@@ -22,8 +22,8 @@ public class CourierOfficeOutlet {
 	private LocalTime openingTime;
 	private LocalTime closingTime;	
 	
-	@OneToMany(mappedBy="office")
-	private List<OfficeStaffMember> staffMembers= new ArrayList<>();
+	/*@OneToMany(mappedBy="office")
+	private List<OfficeStaffMember> staffMembers;*/
     
 	
 	@OneToOne

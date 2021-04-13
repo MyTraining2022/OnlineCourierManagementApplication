@@ -1,6 +1,7 @@
 package com.cg.mts.entities;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -43,6 +44,9 @@ public class OfficeStaffMember {
 	@JoinColumn(name="managerId")
 	private OfficeStaffMember manager;
 	
+	@OneToMany()
+	@JoinColumn(name= "manager")
+	private List<OfficeStaffMember> substaff;
 	
 
 	public OfficeStaffMember() {

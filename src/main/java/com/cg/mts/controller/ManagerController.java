@@ -60,6 +60,7 @@ public class ManagerController {
 			return "Delete successfull";
 		}else
 			throw new StaffMemberNotFoundException("Delete  Employee with id "+id+" not found.");
+		
 	}
 
 	
@@ -76,20 +77,10 @@ public class ManagerController {
 	} 
 	
 	@GetMapping(value="/filterBy/id_type/CourierStatus/{cid}")
-	public ResponseEntity<?> getCourierStatus(@PathVariable(name= "cid")int courierId) {
-		/*Optional<Courier> courier = courierRepo.findById(courierId);
-		if(courier.isEmpty()) {
-			throw new CourierNotFoundException("CourierId is not in database"+courierId);
-		}
+	public CourierStatus getCourierStatus(@PathVariable(name= "cid")int courierId) {
 		
-		return new ResponseEntity<CourierStatus>(courier.get().getStatus(),HttpStatus.OK);
-		*/
-		if(managerservice.getCourierStatus(courierId)) {
-			Optional<Courier> courier = courierRepo.findById(courierId);
-			return new ResponseEntity<CourierStatus>(courier.get().getStatus(),HttpStatus.OK);
-		}else {
-			throw new CourierNotFoundException("CourierId is not in database"+courierId);
-		}
+		return managerservice.getCourierStatus(courierId);
+		
 		
 		
 	}
