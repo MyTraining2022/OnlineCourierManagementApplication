@@ -44,9 +44,7 @@ public class OfficeStaffMember {
 	@JoinColumn(name="managerId")
 	private OfficeStaffMember manager;
 	
-	/*@OneToMany()
-	@JoinColumn(name= "manager")
-	private List<OfficeStaffMember> substaff;*/
+
 	
 
 	public OfficeStaffMember() {
