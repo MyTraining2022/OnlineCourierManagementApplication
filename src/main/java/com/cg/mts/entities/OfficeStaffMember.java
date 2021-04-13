@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "OfficeStaffMember")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -32,18 +34,24 @@ public class OfficeStaffMember {
 	private String role;
 	
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "addressId")
 	private Address address;
 
+	@JsonIgnore
 	@ManyToOne()
 	@JoinColumn(name = "officeId")
 	private CourierOfficeOutlet office;
 
+	
 	@ManyToOne()
 	@JoinColumn(name="managerId")
 	private OfficeStaffMember manager;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy ="manager")
+	private Set<OfficeStaffMember> subStaff= new HashSet<>();
 
 	
 
