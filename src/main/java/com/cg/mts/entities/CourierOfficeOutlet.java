@@ -22,16 +22,12 @@ public class CourierOfficeOutlet {
 	private LocalTime openingTime;
 	private LocalTime closingTime;	
 	
-	/*@OneToMany(mappedBy="office")
-	private List<OfficeStaffMember> staffMembers;*/
-    
-	
 	@OneToOne
 	@JoinColumn(name="addressId")
 	private Address address;
 	
-	@OneToOne()
-	private Manager managerw;
+	//@OneToOne()
+	//private Manager managerw;
 	
 	public CourierOfficeOutlet() {
 		
@@ -94,6 +90,16 @@ public class CourierOfficeOutlet {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+
+	/*public Manager getManagerw() {
+		return managerw;
+	}
+
+
+	public void setManagerw(Manager managerw) {
+		this.managerw = managerw;
+	}*/
 
 	
 	
