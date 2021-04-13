@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.cg.mts.entities.OfficeStaffMember;
 
 @Repository
-public interface StaffMemberRepository extends JpaRepository<OfficeStaffMember, Integer> {
-	OfficeStaffMember findByEmpId(int id);
+public interface StaffMemberRepository extends CrudRepository<OfficeStaffMember, Integer> {
 
 }
