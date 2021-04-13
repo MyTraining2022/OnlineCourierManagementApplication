@@ -40,13 +40,13 @@ public class OfficeStaffMember {
 	@JoinColumn(name = "officeId")
 	private CourierOfficeOutlet office;
 
-	@ManyToOne(cascade = {CascadeType.ALL})
+	@ManyToOne()
 	@JoinColumn(name="managerId")
 	private OfficeStaffMember manager;
 	
-	@OneToMany()
+	/*@OneToMany()
 	@JoinColumn(name= "manager")
-	private List<OfficeStaffMember> substaff;
+	private List<OfficeStaffMember> substaff;*/
 	
 
 	public OfficeStaffMember() {
