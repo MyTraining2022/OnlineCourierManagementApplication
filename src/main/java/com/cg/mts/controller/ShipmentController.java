@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.mts.entities.Courier;
-import com.cg.mts.exception.CourierNotFoundException;
+import com.cg.mts.exceptions.CourierNotFoundException;
 import com.cg.mts.service.IShipmentService;
 
 @RestController

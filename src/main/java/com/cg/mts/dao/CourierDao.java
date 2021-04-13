@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.cg.mts.entities.Courier;
 import com.cg.mts.entities.CourierStatus;
-import com.cg.mts.exception.CourierNotFoundException;
-import com.cg.mts.repositories.CourierRepository;
+import com.cg.mts.exceptions.CourierNotFoundException;
+import com.cg.mts.repository.CourierRepository;
 
 @Component
 public class CourierDao implements ICourierDao {

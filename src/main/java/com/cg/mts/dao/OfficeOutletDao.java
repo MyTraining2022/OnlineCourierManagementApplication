@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.cg.mts.entities.CourierOfficeOutlet;
 import com.cg.mts.entities.OfficeStaffMember;
-import com.cg.mts.exception.OutletNotFoundException;
+import com.cg.mts.exceptions.OutletNotFoundException;
 import com.cg.mts.repository.OfficeOutletRepository;
 
 @Component
@@ -35,7 +35,7 @@ public class OfficeOutletDao implements IOfficeOutletDao{
 	@Override
 	public List<CourierOfficeOutlet> getAllOfficesData() {
 		
-		return officeRepo.findAll();
+		return (List<CourierOfficeOutlet>) officeRepo.findAll();
 	}
 
 	@Override

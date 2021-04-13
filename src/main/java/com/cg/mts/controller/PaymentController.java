@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.mts.entities.Payment;
-import com.cg.mts.exception.EmptyDataException;
-import com.cg.mts.exception.PaymentNotFoundException;
-import com.cg.mts.services.IPaymentService;
-import com.cg.mts.services.PaymentService;
+import com.cg.mts.exceptions.EmptyDataException;
+import com.cg.mts.exceptions.PaymentNotFoundException;
+import com.cg.mts.service.IPaymentService;
+import com.cg.mts.service.PaymentService;
+import com.cg.mts.service.IPaymentService;
 
 @RestController
 @RequestMapping("payment")
@@ -26,7 +27,7 @@ public class PaymentController {
 	public ResponseEntity<?> getPayment(@PathVariable("id") int paymentId) {
 		Payment p = service.getPaymentDetailsById(paymentId);
 		if (p == null)
-			throw new PaymentNotFoundException("Request","Payment with id: " + paymentId + "not found!");
+			throw new PaymentNotFoundException("Payment with id: " + paymentId + "not found!");
 
 		return new ResponseEntity<Payment>(p, HttpStatus.OK);
 	}

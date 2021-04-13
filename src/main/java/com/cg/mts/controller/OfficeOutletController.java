@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.mts.entities.CourierOfficeOutlet;
 import com.cg.mts.entities.OfficeStaffMember;
-import com.cg.mts.exception.OutletClosedException;
-import com.cg.mts.exception.OutletNotFoundException;
+import com.cg.mts.exceptions.OutletClosedException;
+import com.cg.mts.exceptions.OutletNotFoundException;
 import com.cg.mts.service.OfficeOutletService;
 
 @RestController

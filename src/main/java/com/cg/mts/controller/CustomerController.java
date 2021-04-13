@@ -19,31 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.mts.entities.CourierStatus;
 import com.cg.mts.entities.Customer;
 import com.cg.mts.exceptions.CustomerNotFoundException;
-import com.cg.mts.exceptions.EmtyDataException;
+import com.cg.mts.exceptions.EmptyDataException;
 import com.cg.mts.service.CustomerService;
 
-/*
-import java.util.List;
 
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.cg.mts.entities.Customer;
-import com.cg.mts.exceptions.CustomerNotFoundException;
-import com.cg.mts.exceptions.EmtyDataException;
-import com.cg.mts.service.CustomerService;
-import com.google.common.net.MediaType;*/
 
 
 @RestController
@@ -67,7 +46,7 @@ public class CustomerController {
 	public List<Customer> getAllCustomer() {
 		List<Customer> list = service.getAll();
 		if (list.size() == 0)
-			throw new EmtyDataException("No customer in data base");
+			throw new EmptyDataException("No customer in data base");
 		return list;
 	}
 

@@ -1,5 +1,7 @@
 package com.cg.mts.entities;
 
+ 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,83 +11,115 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+ 
+
 @Entity
 @Table(name="complaint")
 public class Complaint {
 
-	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private int complaintId;
-	
-	
-	private String shortDescription;
-	private String detailedDescription;
-	
-	@OneToOne
-	@JoinColumn(name="consignmentNo")
-	private Courier consignmentNo;
-	
-	
-	@ManyToOne
-	@JoinColumn(name="customerId")
-	private Customer customer;
-	
-	
+ 
 
-	public Complaint() {
-		
-	}
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private int complaintId;
+    
+    
+    private String shortDescription;
+    private String detailedDescription;
+    
+    @OneToOne
+    @JoinColumn(name="consignmentNo")
+    private Courier consignmentNo;
+    
+    
+    @ManyToOne
+    @JoinColumn(name="customerId")
+    private Customer customer;
+    
+    
 
-	public Complaint( String shortDescription, String detailedDescription) {
-		super();
-	
-		this.shortDescription = shortDescription;
-		this.detailedDescription = detailedDescription;
-	}
+ 
 
-	
-	public int getComplaintId() {
-		return complaintId;
-	}
+    public Complaint() {
+        
+    }
 
-	public void setComplaintId(int complaintId) {
-		this.complaintId = complaintId;
-	}
+ 
 
-	
+    public Complaint( String shortDescription, String detailedDescription) {
+        super();
+    
+        this.shortDescription = shortDescription;
+        this.detailedDescription = detailedDescription;
+    }
 
-	public String getShortDescription() {
-		return shortDescription;
-	}
+ 
 
-	public void setShortDescription(String shortDescription) {
-		this.shortDescription = shortDescription;
-	}
+    
+    public int getComplaintId() {
+        return complaintId;
+    }
 
-	public String getDetailedDescription() {
-		return detailedDescription;
-	}
+ 
 
-	public void setDetailedDescription(String detailedDescription) {
-		this.detailedDescription = detailedDescription;
-	}
+    public void setComplaintId(int complaintId) {
+        this.complaintId = complaintId;
+    }
 
-	public Customer getCustomer() {
-		return customer;
-	}
+ 
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+    
 
-	public Courier getConsignmentNo() {
-		return consignmentNo;
-	}
+ 
 
-	public void setConsignmentNo(Courier consignmentNo) {
-		this.consignmentNo = consignmentNo;
-	}
-	
-	
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+ 
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
+ 
+
+    public String getDetailedDescription() {
+        return detailedDescription;
+    }
+
+ 
+
+    public void setDetailedDescription(String detailedDescription) {
+        this.detailedDescription = detailedDescription;
+    }
+
+ 
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+ 
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+ 
+
+    public Courier getConsignmentNo() {
+        return consignmentNo;
+    }
+
+ 
+
+    public void setConsignmentNo(Courier consignmentNo) {
+        this.consignmentNo = consignmentNo;
+    }
+    
+    
+
+ 
 
 }

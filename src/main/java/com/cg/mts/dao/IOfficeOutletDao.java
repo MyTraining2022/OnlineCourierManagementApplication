@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.cg.mts.entities.CourierOfficeOutlet;
 import com.cg.mts.entities.OfficeStaffMember;
-import com.cg.mts.exception.OutletNotFoundException;
+import com.cg.mts.exceptions.OutletNotFoundException;
 
 public interface IOfficeOutletDao {
 

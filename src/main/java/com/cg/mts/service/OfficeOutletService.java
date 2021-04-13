@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import com.cg.mts.dao.IOfficeOutletDao;
 import com.cg.mts.entities.CourierOfficeOutlet;
 import com.cg.mts.entities.OfficeStaffMember;
-import com.cg.mts.exception.OutletClosedException;
-import com.cg.mts.exception.OutletNotFoundException;
+import com.cg.mts.exceptions.OutletClosedException;
+import com.cg.mts.exceptions.OutletNotFoundException;
 
 @Service
 public class OfficeOutletService implements IOfficeOutletService {

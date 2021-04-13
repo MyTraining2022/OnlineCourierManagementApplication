@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.cg.mts.entities.Courier;
 import com.cg.mts.entities.CourierStatus;
-import com.cg.mts.exception.CourierNotFoundException;
+import com.cg.mts.exceptions.CourierNotFoundException;
 
 public interface IShipmentService {
 

@@ -1,8 +1,12 @@
 package com.cg.mts.entities;
 
+ 
+
 import java.time.LocalDate;
 
-import javax.persistence.Column;
+ 
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,116 +18,145 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+ 
+
 @Entity
 @Table(name="courier")
 public class Courier {
 
-	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private int courierId;
-	
-	@Column(unique = true)
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private int consignmentNo;
-	
-	private LocalDate initiatedDate;
-	
-	@Enumerated(EnumType.STRING)
-	private CourierStatus status;
-	private LocalDate deliveredDate;
-	
-	@ManyToOne
-	//@JoinColumn(name= "customer_id")
-	private Customer sender;
-	
-	@ManyToOne
-	//@JoinColumn(name= "customer_id")
-	private Customer receiver;
-	
-	@OneToOne
-	@JoinColumn(name="paymentId")
-	private Payment payment;
-	
-	public Courier() {
-		
-	}
+ 
 
-	public Courier(CourierStatus status, LocalDate initiatedDate,LocalDate deliveredDate) {
-		super();
-		
-		this.status = status;
-		this.initiatedDate = initiatedDate;
-		this.deliveredDate = deliveredDate;
-	}
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private int courierId;
+    
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private int consignmentNo;
+    
+    private LocalDate initiatedDate;
+    @Enumerated(EnumType.STRING)
+    private CourierStatus status;
+    private LocalDate deliveredDate;
+    
+    @ManyToOne(cascade=CascadeType.REFRESH)
+    @JoinColumn(name= "senderCustomer")
+    private Customer sender;
+    
+    @ManyToOne(cascade=CascadeType.REFRESH)
+    @JoinColumn(name= "receiverCustomer")
+    private Customer receiver;
+    
+    @OneToOne
+    @JoinColumn(name="paymentId")
+    private Payment payment;
+    
+    public Courier() {
+        
+    }
 
-	
-	public int getCourierId() {
-		return courierId;
-	}
+ 
 
-	public void setCourierId(int courierId) {
-		this.courierId = courierId;
-	}
+    public Courier(CourierStatus status, LocalDate initiatedDate,LocalDate deliveredDate) {
+        super();
+        
+        this.status = status;
+        this.initiatedDate = initiatedDate;
+        this.deliveredDate = deliveredDate;
+    }
 
-	public int getConsignmentNo() {
-		return consignmentNo;
-	}
+ 
 
-	public void setConsignmentNo(int consignmentNo) {
-		this.consignmentNo = consignmentNo;
-	}
+    
+    public int getCourierId() {
+        return courierId;
+    }
 
-	public LocalDate getInitiatedDate() {
-		return initiatedDate;
-	}
+ 
 
-	public void setInitiatedDate(LocalDate initiatedDate) {
-		this.initiatedDate = initiatedDate;
-	}
+    public void setCourierId(int courierId) {
+        this.courierId = courierId;
+    }
 
-	public CourierStatus getStatus() {
-		return status;
-	}
+ 
 
-	public void setStatus(CourierStatus status) {
-		this.status = status;
-	}
+    public int getConsignmentNo() {
+        return consignmentNo;
+    }
 
-	public LocalDate getDeliveredDate() {
-		return deliveredDate;
-	}
+ 
 
-	public void setDeliveredDate(LocalDate deliveredDate) {
-		this.deliveredDate = deliveredDate;
-	}
+    public void setConsignmentNo(int consignmentNo) {
+        this.consignmentNo = consignmentNo;
+    }
 
-	public Customer getSender() {
-		return sender;
-	}
+ 
 
-	public void setSender(Customer sender) {
-		this.sender = sender;
-	}
+    public LocalDate getInitiatedDate() {
+        return initiatedDate;
+    }
 
-	public Customer getReceiver() {
-		return receiver;
-	}
+ 
 
-	public void setReceiver(Customer receiver) {
-		this.receiver = receiver;
-	}
-	
-	public Payment getPayment() {
-		return payment;
-	}
+    public void setInitiatedDate(LocalDate initiatedDate) {
+        this.initiatedDate = initiatedDate;
+    }
 
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
+ 
 
-	
-	
-	
-	
+    public CourierStatus getStatus() {
+        return status;
+    }
+
+ 
+
+    public void setStatus(CourierStatus status) {
+        this.status = status;
+    }
+
+ 
+
+    public LocalDate getDeliveredDate() {
+        return deliveredDate;
+    }
+
+ 
+
+    public void setDeliveredDate(LocalDate deliveredDate) {
+        this.deliveredDate = deliveredDate;
+    }
+
+ 
+
+    public Customer getSender() {
+        return sender;
+    }
+
+ 
+
+    public void setSender(Customer sender) {
+        this.sender = sender;
+    }
+
+ 
+
+    public Customer getReceiver() {
+        return receiver;
+    }
+
+ 
+
+    public void setReceiver(Customer receiver) {
+        this.receiver = receiver;
+    }
+    
+    public Payment getPayment() {
+        return payment;
+    }
+
+ 
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 
 }
