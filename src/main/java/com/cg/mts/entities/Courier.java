@@ -4,11 +4,8 @@ package com.cg.mts.entities;
 
 import java.time.LocalDate;
 
-<<<<<<< HEAD
  
 
-=======
->>>>>>> bfa0f74e381070ffcbf040efaac0c439a0a2a4f9
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -27,7 +24,6 @@ import javax.persistence.Table;
 @Table(name="courier")
 public class Courier {
 
-<<<<<<< HEAD
  
 
     @Id
@@ -162,112 +158,5 @@ public class Courier {
     public void setPayment(Payment payment) {
         this.payment = payment;
     }
-=======
-	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private int courierId;
-	
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private int consignmentNo;
-	
-	private LocalDate initiatedDate;
-	@Enumerated(EnumType.STRING)
-	private CourierStatus status;
-	private LocalDate deliveredDate;
-	
-	@ManyToOne(cascade=CascadeType.REFRESH)
-	@JoinColumn(name= "senderCustomer")
-	private Customer sender;
-	
-	@ManyToOne(cascade=CascadeType.REFRESH)
-	@JoinColumn(name= "receiverCustomer")
-	private Customer receiver;
-	
-	@OneToOne
-	@JoinColumn(name="paymentId")
-	private Payment payment;
-	
-	public Courier() {
-		
-	}
-
-	public Courier(CourierStatus status, LocalDate initiatedDate,LocalDate deliveredDate) {
-		super();
-		
-		this.status = status;
-		this.initiatedDate = initiatedDate;
-		this.deliveredDate = deliveredDate;
-	}
-
-	
-	public int getCourierId() {
-		return courierId;
-	}
-
-	public void setCourierId(int courierId) {
-		this.courierId = courierId;
-	}
-
-	public int getConsignmentNo() {
-		return consignmentNo;
-	}
-
-	public void setConsignmentNo(int consignmentNo) {
-		this.consignmentNo = consignmentNo;
-	}
-
-	public LocalDate getInitiatedDate() {
-		return initiatedDate;
-	}
-
-	public void setInitiatedDate(LocalDate initiatedDate) {
-		this.initiatedDate = initiatedDate;
-	}
-
-	public CourierStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(CourierStatus status) {
-		this.status = status;
-	}
-
-	public LocalDate getDeliveredDate() {
-		return deliveredDate;
-	}
-
-	public void setDeliveredDate(LocalDate deliveredDate) {
-		this.deliveredDate = deliveredDate;
-	}
-
-	public Customer getSender() {
-		return sender;
-	}
-
-	public void setSender(Customer sender) {
-		this.sender = sender;
-	}
-
-	public Customer getReceiver() {
-		return receiver;
-	}
-
-	public void setReceiver(Customer receiver) {
-		this.receiver = receiver;
-	}
-	
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
-
-	
-	
-	
-	
->>>>>>> bfa0f74e381070ffcbf040efaac0c439a0a2a4f9
 
 }
