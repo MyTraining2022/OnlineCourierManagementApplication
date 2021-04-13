@@ -6,7 +6,6 @@ public class CustomerNotFoundException extends RuntimeException{
 	public CustomerNotFoundException(String operation, String message) {
 		super(message);
 		this.operation=operation;
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getOperation() {
