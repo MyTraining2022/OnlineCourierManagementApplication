@@ -26,7 +26,7 @@ public class CourierOfficeOutlet {
 	@JoinColumn(name="addressId")
 	private Address address;
 	
-	@OneToMany()
+	@OneToMany(mappedBy="office",cascade = CascadeType.ALL)
 	private List<OfficeStaffMember> StaffMembers = new ArrayList<>() ;
 	
 	public CourierOfficeOutlet() {
