@@ -10,15 +10,15 @@ public interface ICourierDao {
 
 	List<Courier> getAllCouriers();
 	
-	public Courier getCourier(int courierId) throws CourierNotFoundException;
+	Courier getCourier(int courierId);
 	
-	public void addCourier(Courier courier);
+	Courier addCourier(Courier courier);
 	
 	boolean deleteCourier(int courierId);
 	
 	boolean updateCourier(Courier courier);
 	
-	CourierStatus getCourierStatus(Courier courier);
+	CourierStatus getCourierStatus(int courierId);
 	
-	CourierStatus updateCourierStatus(Courier courier);
+	boolean updateCourierStatus(int courierId);
 }

@@ -1,5 +1,6 @@
 package com.cg.mts.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,23 +20,34 @@ public class CourierDao implements ICourierDao {
 
 	@Override
 	public List<Courier> getAllCouriers() {
-		List<Courier> cour = courRepository.findAll();
-		return cour;
+		Iterable<Courier> c = courRepository.findAll();
+		List<Courier> couriers = new ArrayList<>();
+		for(Courier cour : c) {
+			couriers.add(cour);
+		}
+		return couriers;
 	}
 
 	@Override
-	public void addCourier(Courier courier) {
-		if(!(courRepository.existsById(courier.getCourierId())))
-				courRepository.save(courier);	
+	public Courier addCourier(Courier courier) {
+		if(!(courRepository.existsById(courier.getCourierId()))) {
+				return courRepository.save(courier);	
+		}
+			return null;
 	}
 	
 	@Override
-	public Courier getCourier(int courierId) throws CourierNotFoundException  {
+	public Courier getCourier(int courierId) {
 		 if (!(courRepository.existsById(courierId))) {
 		 throw new CourierNotFoundException("Courier with Id " + courierId + " not found");
 		 } else {
 				Optional<Courier> courier1 = courRepository.findById(courierId);
-				return courier1.get();
+				if(courier1.isPresent()) {
+					return courier1.get();
+				}
+				else {
+					throw new IllegalArgumentException("No value found");
+				}
 		 }
 	}
 	
@@ -59,15 +71,18 @@ public class CourierDao implements ICourierDao {
 	}
 
 	@Override
-	public CourierStatus getCourierStatus(Courier courier) {
-		Optional<Courier> courier1 = courRepository.findById(courier.getCourierId());
+	public CourierStatus getCourierStatus(int courierId) {
+		Optional<Courier> courier1 = courRepository.findById(courierId);
 		return courier1.get().getStatus();
 	}
 
 	@Override
-	public CourierStatus updateCourierStatus(Courier courier) {
-		Optional<Courier> courier1 = courRepository.findById(courier.getCourierId());
-		courier1.get().setStatus(CourierStatus.delivered);
-		return courier1.get().getStatus();
+	public boolean updateCourierStatus(int courierId) {
+		if(courRepository.existsById(courierId)) {
+			Optional<Courier> courier1 = courRepository.findById(courierId);
+			courier1.get().setStatus(CourierStatus.delivered);
+			return true;
+		}
+		return false;
 	}
 }
