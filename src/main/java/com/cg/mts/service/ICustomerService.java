@@ -11,18 +11,24 @@ import com.cg.mts.exceptions.CourierNotFoundException;
 
 public interface ICustomerService {
 
-	public void initiateProcess(Customer senderCustomer, Customer recieverCustomer) throws CourierIdExistsException;
-	public void makePayment(int id);
+	public boolean initiateProcess(Customer senderCustomer, Customer recieverCustomer) throws CourierIdExistsException;
+
+	public boolean makePayment(int id, String mode);
+
 	public CourierStatus checkOnlineTrackingStatus(int courierId) throws CourierNotFoundException;
-	public void registerComplaint(Complaint complaint);
-	
+
+	public boolean registerComplaint(Complaint complaint);
+
 	boolean add(Customer e);
+
 	List<Customer> getAll();
+
 	boolean delete(int id);
+
 	Customer getCustomer(int id);
+
 	boolean update(Customer e);
-	
-	
-	
-	
+
+	//void initiateProcess();
+
 }
