@@ -1,6 +1,6 @@
 package com.cg.mts.exceptions;
 
-public class ComplaintNotFoundException extends Exception {
+public class ComplaintNotFoundException extends RuntimeException {
 	private String operation;
 
 	public ComplaintNotFoundException(String operation, String message) {
