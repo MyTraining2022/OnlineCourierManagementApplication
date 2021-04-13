@@ -26,8 +26,8 @@ public class CourierOfficeOutlet {
 	@JoinColumn(name="addressId")
 	private Address address;
 	
-	//@OneToOne()
-	//private Manager managerw;
+	@OneToMany()
+	private List<OfficeStaffMember> StaffMembers = new ArrayList<>() ;
 	
 	public CourierOfficeOutlet() {
 		
