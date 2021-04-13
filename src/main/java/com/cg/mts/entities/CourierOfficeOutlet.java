@@ -22,10 +22,6 @@ public class CourierOfficeOutlet {
 	private LocalTime openingTime;
 	private LocalTime closingTime;	
 	
-	/*@OneToMany(mappedBy="office")
-	private List<OfficeStaffMember> staffMembers;*/
-    
-	
 	@OneToOne
 	@JoinColumn(name="addressId")
 	private Address address;
