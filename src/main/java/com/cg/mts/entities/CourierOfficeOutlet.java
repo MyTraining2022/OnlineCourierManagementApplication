@@ -27,7 +27,7 @@ public class CourierOfficeOutlet {
 	private Address address;
 	
 	@OneToMany(mappedBy="office",cascade = CascadeType.ALL)
-	private List<OfficeStaffMember> StaffMembers = new ArrayList<>() ;
+	private List<OfficeStaffMember> staffMembers = new ArrayList<>() ;
 	
 	public CourierOfficeOutlet() {
 		
