@@ -23,6 +23,6 @@ public interface IManagerService {
 	
 	public CourierStatus getCourierStatus(int courierId) ;
 	
-	public Complaint getRegistedComplaint(int complaintid) ;//throws ComplaintNotFoundException;
+	public boolean getRegistedComplaint(int complaintid) ;//throws ComplaintNotFoundException;
 	public List<Complaint> getAllComplaints();
 }

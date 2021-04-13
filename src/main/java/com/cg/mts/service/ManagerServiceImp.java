@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.cg.mts.dao.IStaffMemberDao;
@@ -14,6 +16,7 @@ import com.cg.mts.entities.Courier;
 import com.cg.mts.entities.CourierOfficeOutlet;
 import com.cg.mts.entities.CourierStatus;
 import com.cg.mts.entities.OfficeStaffMember;
+import com.cg.mts.exceptions.ComplaintNotFoundException;
 import com.cg.mts.exceptions.CourierNotFoundException;
 import com.cg.mts.exceptions.DuplicateStaffMemberFoundException;
 import com.cg.mts.exceptions.StaffMemberNotFoundException;
@@ -60,14 +63,6 @@ public class ManagerServiceImp implements IManagerService{
 		
 		return StaffMemberDao.removeStaffMember(id);
 		
-		/*if(StaffMemberRepo.existsById(id)) {
-			StaffMemberRepo.deleteById(id);
-			return true;
-		}
-		else {
-			throw new StaffMemberNotFoundException("Staff id "+id+" is not present in database." );
-		}*/
-		
 		
 	
 	}
@@ -89,26 +84,27 @@ public class ManagerServiceImp implements IManagerService{
 			return courierRepo.getStatus(courier.getCourierId());
 		}*/
 		
-		Optional<Courier> courier = courierRepo.findById(courierId);
-		if(courier.isPresent()) {
-			return courier.get().getStatus();
+			Optional<Courier> courier = courierRepo.findById(courierId);
+			if(courier.isPresent()) {
+			return  courier.get().getStatus();
+			}else {
+			throw new CourierNotFoundException("CourierId is not in database"+courierId);
 		}
-		else {
-			return null;
-		}
-		
 	}
 
 	
 	
 	
 	@Override
-	public Complaint getRegistedComplaint(int complaintid) {
+	public boolean getRegistedComplaint(int complaintid) {
 		Optional<Complaint> complaint = complaintRepo.findById(complaintid);
 		if(complaint.isPresent()) {
-			return complaint.get();
+			//return complaint.get();
+			return true;
 		}
-		return null;
+		else {
+			throw new ComplaintNotFoundException("Not able to find complaintId","Try again");
+		}
 	}
 
 	@Override
