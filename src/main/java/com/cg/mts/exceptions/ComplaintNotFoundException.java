@@ -6,7 +6,6 @@ public class ComplaintNotFoundException extends RuntimeException {
 	public ComplaintNotFoundException(String operation, String message) {
 		super(message);
 		this.operation=operation;
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getOperation() {
